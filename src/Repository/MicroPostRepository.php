@@ -12,9 +12,30 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class MicroPostRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
-    {
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(
+        ManagerRegistry $registry,
+        EntityManagerInterface $entityManager
+    ) {
         parent::__construct($registry, MicroPost::class);
+        $this->entityManager = $entityManager;
+    }
+
+    public function add(MicroPost $microPost, bool $flush = true): void
+    {
+        $this->entityManager->persist($microPost);
+        if ($flush) {
+            $this->entityManager->flush();
+        }
+    }
+
+    public function remove(MicroPost $microPost, bool $flush = true): void
+    {
+        $this->entityManager->remove($microPost);
+        if ($flush) {
+            $this->entityManager->flush();
+        }
     }
 
     //    /**
