@@ -22,6 +22,16 @@ class MicroPostRepository extends ServiceEntityRepository
         $this->entityManager = $entityManager;
     }
 
+    public function findAllWithComments(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('c')
+            ->leftJoin('p.comments', 'c')
+            ->orderBy('p. created', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function add(MicroPost $microPost, bool $flush = true): void
     {
         $this->entityManager->persist($microPost);

@@ -4,7 +4,7 @@
 {% block title %}Edit an existing post{% endblock %}
 
 {% block bread %}
-> Edit Post
+> <a href="{{ path('app_micro_post_show', {id: post.id}) }}">Post</a> > Edit
 {% endblock %}
 
 {% block body %}
