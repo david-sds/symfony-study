@@ -20,20 +20,15 @@ class HelloController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(MicroPostRepository $posts, CommentRepository $comments): Response
     {
-        /* $post = new MicroPost(); */
+        $post = new MicroPost();
         /* $post->setTitle('Hello'); */
         /* $post->setText('Hello'); */
         /* $post->setCreated(new DateTime()); */
 
+        /** @var MicroPost $post */
         $post = $posts->find(2);
-        if (!$post instanceof MicroPost) {
-            throw new \Exception("Post not found");
-        }
         $comment = $post->getComments()[0];
 
-        if (!$comment instanceof Comment) {
-            throw new \Exception("Comment not found");
-        }
         $comment->setPost(null);
         $comments->add($comment);
         /* dd($post); */
