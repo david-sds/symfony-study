@@ -16,10 +16,8 @@ class UserProfileRepository extends ServiceEntityRepository
 
     public function __construct(
         ManagerRegistry $registry,
-        EntityManagerInterface $entityManager,
     ) {
         parent::__construct($registry, UserProfile::class);
-        $this->entityManager = $entityManager;
     }
 
     public function add(UserProfile $userProfile, bool $flush = true): void
