@@ -25,17 +25,17 @@ class HelloController extends AbstractController
         /* $post->setText('Hello'); */
         /* $post->setCreated(new DateTime()); */
 
-        $post = $posts->find(2);
-        if (!$post instanceof MicroPost) {
-            throw new \Exception("Post not found");
-        }
-        $comment = $post->getComments()[0];
-
-        if (!$comment instanceof Comment) {
-            throw new \Exception("Comment not found");
-        }
-        $comment->setPost(null);
-        $comments->add($comment);
+        /* $post = $posts->find(2); */
+        /* if (!$post instanceof MicroPost) { */
+        /*     throw new \Exception("Post not found"); */
+        /* } */
+        /* $comment = $post->getComments()[0]; */
+        /**/
+        /* if (!$comment instanceof Comment) { */
+        /*     throw new \Exception("Comment not found"); */
+        /* } */
+        /* $comment->setPost(null); */
+        /* $comments->add($comment); */
         /* dd($post); */
 
         /* $comment = new Comment(); */
