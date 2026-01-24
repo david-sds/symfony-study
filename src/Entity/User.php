@@ -66,7 +66,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var Collection<int, self>
      */
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'followers')]
-    #[ORM\JoinTable('followers')]
+    #[ORM\JoinTable('follower')]
     private Collection $follows;
 
     /**

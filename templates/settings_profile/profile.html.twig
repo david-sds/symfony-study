@@ -2,6 +2,7 @@
 {% block title %}Profile Settings{% endblock %}
 {% block bread %}> Profile Settings{% endblock %}
 {% block body %}
+    {{include('settings_profile/_settings_profile_tabs.html.twig')}}
     {{ form_start(form) }}
         {{ include("settings_profile/_profile_form.html.twig") }}
         <div>
