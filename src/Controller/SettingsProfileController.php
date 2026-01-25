@@ -55,6 +55,7 @@ final class SettingsProfileController extends AbstractController
     public function profileImage(
         Request $request,
         SluggerInterface $slugger,
+        UserRepository $users,
     ): Response {
         $form = $this->createForm(ProfileImageType::class);
         /** @var User $user */
@@ -67,7 +68,7 @@ final class SettingsProfileController extends AbstractController
 
             if ($profileImageFile) {
                 $originalFileName = pathinfo(
-                    $profileImageFile->getClientOrignalName(),
+                    $profileImageFile->getClientOriginalPath(),
                     PATHINFO_FILENAME,
                 );
                 $safeFilename = $slugger->slug($originalFileName);
@@ -83,7 +84,12 @@ final class SettingsProfileController extends AbstractController
 
                 $profile = $user->getUserProfile() ?? new UserProfile();
                 $profile->setImage($newFileName);
+                $users->add($user);
+                $this->addFlash('success', 'Your profile image was updated.');
+
+                return $this->redirectToRoute('app_settings_profile_image');
             }
+
         }
 
         return $this->render('settings_profile/profile_image.html.twig', [
